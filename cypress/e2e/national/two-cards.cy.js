@@ -12,18 +12,19 @@ describe('Automação - Cartão de Crédito BRL', () => {
     cy.contains('Dois Cartões').click()
     
     cy.get('input[name="amountcc"]').eq(0).type('9500', { force: true })
-    cy.get('input[name="ccnumber_1"]').eq(0).type('4235647728025682', { force: true });
-    cy.get('select[name="ccmonth_1"]').eq(0).select('01', { force: true }); // Mês de validade
-    cy.get('select[name="ccyear_1"]').eq(0).select('2035', { force: true }); // Ano de validade
+    cy.get('input[name="ccnumber_1"]').eq(0).type('45555341244441115', { force: true });
+    cy.get('select[name="ccmonth_1"]').eq(0).select('03', { force: true }); // Mês de validade
+    cy.get('select[name="ccyear_1"]').eq(0).select('2030', { force: true }); // Ano de validade
     cy.get('select[name="tel"]').eq(0).select('12', { force: true }); // Parcelas (se aplicável)
-    cy.get('input[name="phone"]', { force: true }).eq(0).type('123', { force: true }); // CVV
+    // cy.get('input[maxlength="524288"]', { force: true }).eq(0).type('737', { force: true }); // CVV
+    cy.get('Cód. Segurança').eq(0).click()
     cy.get('input[id="saveCard1"').click()
 
-    cy.get('input[name="ccnumber"]').eq(1).type('4235647728025682', { force: true });
-    cy.get('select[name="ccmonth"]').eq(1).select('01', { force: true }); // Mês de validade
-    cy.get('select[name="ccyear"]').eq(1).select('2035', { force: true }); // Ano de validade
+    cy.get('input[autocomplete="ccnumber"]').eq(1).type('2222400010000008', { force: true });
+    cy.get('select[autocomplete="ccmonth"]').eq(1).select('03', { force: true }); // Mês de validade
+    cy.get('select[autocomplete="ccyear"').eq(1).select('2030', { force: true }); // Ano de validade
     cy.get('select[name="tel"]').eq(1).select('12', { force: true }); // Parcelas (se aplicável)
-    cy.get('input[kiwi-data="cccv"]').eq(1).click().type('123', { force: true }); // CVV
+    cy.get('input[class="kiwi-input-field"]').eq(1).click().type('737', { force: true }); // CVV
     cy.get('#saveDetails').click()
   })
 
