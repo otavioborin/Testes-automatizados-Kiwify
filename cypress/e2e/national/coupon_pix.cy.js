@@ -1,24 +1,25 @@
-const buyerName = "Teste Nome";
-const buyerEmail = "otavio.borin+teste1@kiwify.com.br";
-const password = "123456";
+const buyerName = "Teste Nome"; 
+const buyerEmail = "otavio.borin+teste1@kiwify.com.br"; 
 
-describe('Automação de Testes Kiwify', () => {
-  it('Realiza o pagamento via Pix', () => {
-    cy.visit('https://pay-dev.kiwify.com.br/Mbf14rC');
-    cy.get('input[name="fullname"]').type(buyerName);
-    cy.get('input[kiwi-data="email"]').type(buyerEmail);
-    cy.get('input[kiwi-data="confirmEmail"]').type(buyerEmail);
-    cy.get('input[name="document"]').type('12312312387');
-    cy.get('input[kiwi-data="phone"]').type('11987654321');
+describe('template spec', () => {
+  it('passes', () => {
+    cy.visit('https://pay-dev.kiwify.com.br/Mbf14rC')
+    cy.get('input[name="fullname"]').type(buyerName)
+    cy.get('input[kiwi-data="email"').type(buyerEmail)
+    cy.get('input[kiwi-data="confirmEmail"').type(buyerEmail)
+    cy.get('input[name="document"]').type('12312312387')
+    cy.get('input[kiwi-data="phone"').type('11987654321')
+    cy.get('button[type="button"]').eq(0).click()
+    cy.get('input[name="coupon"]').type('CUPOM10').wait(2000)
     cy.contains('Pix').click();
     cy.get('a[kiwi-data="pay_button"]').click();
     cy.contains('Pedido gerado! Agora finalize o pagamento', { timeout: 60000 }).should('be.visible');
   });
 
-  it('Verifica o status do pagamento', () => {
-    cy.visit('https://dashboard-dev-kiwify.netlify.app/');
-    cy.clearAllCookies().clearAllLocalStorage().clearAllSessionStorage();
-    cy.ensureAuthenticated();
+  it('log in', () => {
+    cy.visit('https://dashboard-dev-kiwify.netlify.app/')
+    cy.clearAllCookies().clearAllLocalStorage().clearAllSessionStorage()
+    cy.ensureAuthenticated()
     cy.intercept('GET', 'https://admin-api-dev.kiwify.com.br/v2/orders/*').as('getOrder');
     cy.get('a[href="/sales"]').click({ multiple: true, force: true });
     cy.get('.flex-grow > .form-input').type(buyerName).wait(3000);
@@ -64,9 +65,9 @@ describe('Automação de Testes Kiwify', () => {
             checkStatusWithReload(attempt + 1);
 
             cy.contains('Valores').click()
-            cy.contains('Preço base do produto').parents('.grid').contains('R$ 189,99').then(() => cy.log('✓ 200 OK'));
-            cy.contains('Taxas').parents('.grid').contains('R$ 23,37').then(() => cy.log('✓ 200 OK'));
-            cy.contains('R$ 166,62').then(() => cy.log('✓ 200 OK'));
+            cy.contains('Preço do produto').parents('.grid').contains('R$ 170,99').then(() => cy.log('✅ 200 OK'));
+            cy.contains('Taxas').parents('.grid').contains('R$ 21,28').then(() => cy.log('✅ 200 OK'));
+            cy.contains('R$ 149,71').then(() => cy.log('✅ 200 OK'));
           });
         }
       });

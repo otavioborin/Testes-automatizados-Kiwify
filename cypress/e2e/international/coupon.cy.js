@@ -15,6 +15,8 @@ describe('Automação - USD', () => {
     cy.get('select[name="ccmonth_1"]').select('03', { force: true })
     cy.get('select[name="ccyear_1"]').select('2030', { force: true })
     cy.get('input[kiwi-data="cccv"').type('737', { force: true })
+    cy.get('button[type="button"]').eq(0).click()
+    cy.get('input[name="coupon"]').type('CUPOM10').wait(2000)
     cy.get('a[kiwi-data="pay_button"]').click()
     cy.contains('Payment Approved!', { timeout: 60000 }).should('be.visible')
 
@@ -46,10 +48,10 @@ describe('Automação - USD', () => {
     })
 
     cy.contains('Valores').click()
-    cy.contains('Preço base do produto').parents('.grid').contains('$32.99').then(() => cy.log('✅ 200 OK'));
-    cy.contains('Imposto da venda').parents('.grid').contains('$2.19').then(() => cy.log('✅ 200 OK'));
-    cy.contains('Taxas').parents('.grid').contains('$4.10 USD').then(() => cy.log('✅ 200 OK'));
-    cy.contains('$28.89 USD').then(() => cy.log('✅ 200 OK'));
+    cy.contains('Preço do produto').parents('.grid').contains('$29.69').then(() => cy.log('✅ 200 OK'));
+    cy.contains('Imposto da venda').parents('.grid').contains('$1.97').then(() => cy.log('✅ 200 OK'));
+    cy.contains('Taxas').parents('.grid').contains('$3.77 USD').then(() => cy.log('✅ 200 OK'));
+    cy.contains('$25.92 USD').then(() => cy.log('✅ 200 OK'));
     
   })
 })

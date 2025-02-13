@@ -23,15 +23,6 @@ describe('template spec', () => {
     cy.visit('https://dashboard-dev-kiwify.netlify.app/')
     cy.clearAllCookies().clearAllLocalStorage().clearAllSessionStorage()
     cy.ensureAuthenticated()
-    // cy.get('#email').type('otavio.borin@kiwify.com.br')
-    // cy.get('#password').type('91939123Oab!')
-    // cy.get('button[type="button"]').click()
-    // cy.pause() // Pausa o teste até você inserir o código manualmente
-    // cy.get('input[type="tel"]').type(password)
-    // cy.get('button[type="button"]').click()
-    // cy.contains('button[type="button"]', 'Verificar').wait(5000).click()
-
-    // Intercepta a requisição exata que retorna o order_id
     cy.intercept('GET', 'https://admin-api-dev.kiwify.com.br/v2/orders/*').as('getOrder')
     cy.get('a[href="/sales"').click({ multiple: true, force: true})
     cy.get('.flex-grow > .form-input').type(buyerName)
@@ -40,8 +31,8 @@ describe('template spec', () => {
       if (!interception.response || !interception.response.body) {
         throw new Error("❌ Nenhuma resposta da API foi capturada!")
       }
-      console.log("🚀 Resposta da API:", interception.response.body) // Exibe no console do navegador
-      const orderId = interception.response.body.order_id // Pega o campo correto
+      console.log("🚀 Resposta da API:", interception.response.body)
+      const orderId = interception.response.body.order_id 
       if (!orderId) {
         throw new Error("❌ order_id não encontrado na resposta da API")
       }
@@ -51,10 +42,10 @@ describe('template spec', () => {
     })
 
     cy.contains('Valores').click()
-    cy.contains('Preço base do produto').parents('.grid').contains('R$ 189,99').then(() => cy.log('✓ 200 OK'));
-    cy.contains('Preço com acréscimo').parents('.grid').contains('R$ 228,90').then(() => cy.log('✓ 200 OK'));
-    cy.contains('Taxas').parents('.grid').contains('R$ 23,37').then(() => cy.log('✓ 200 OK'));
-    cy.contains('R$ 166,62').then(() => cy.log('✓ 200 OK'));
+    cy.contains('Preço base do produto').parents('.grid').contains('R$ 189,99').then(() => cy.log('✅ 200 OK'));
+    cy.contains('Preço com acréscimo').parents('.grid').contains('R$ 228,90').then(() => cy.log('✅ 200 OK'));
+    cy.contains('Taxas').parents('.grid').contains('R$ 23,37').then(() => cy.log('✅ 200 OK'));
+    cy.contains('R$ 166,62').then(() => cy.log('✅ 200 OK'));
     
   })
 })

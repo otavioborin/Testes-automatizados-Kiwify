@@ -76,10 +76,10 @@
                 });
           
                 cy.contains('Valores').click();
-                cy.contains('Preço base do produto').parents('.grid').contains('R$ 189,99').then(() => cy.log('✓ 200 OK'));
-                cy.contains('Preço com acréscimo').parents('.grid').contains('R$ 228,90').then(() => cy.log('✓ 200 OK'));
-                cy.contains('Taxas').parents('.grid').contains('R$ 23,37').then(() => cy.log('✓ 200 OK'));
-                cy.contains('R$ 166,62').then(() => cy.log('✓ 200 OK'));
+                cy.contains('Preço base do produto').parents('.grid').contains('R$ 189,99').then(() => cy.log('✅ 200 OK'));
+                cy.contains('Preço com acréscimo').parents('.grid').contains('R$ 228,90').then(() => cy.log('✅ 200 OK'));
+                cy.contains('Taxas').parents('.grid').contains('R$ 23,37').then(() => cy.log('✅ 200 OK'));
+                cy.contains('R$ 166,62').then(() => cy.log('✅ 200 OK'));
 
           });
       
