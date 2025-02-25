@@ -10,7 +10,7 @@ Cypress.Commands.add('ensureAuthenticated', () => {
   // Setup device token before visiting the page. This helps us skip 2fa
   cy.setupDeviceToken()
 
-  cy.visit('https://dashboard-dev-kiwify.netlify.app/')
+  cy.visit('https://dashboard-dev-kiwify.netlify.app/login')
   cy.reload()
 
   // Check if we're on the login page by looking at the url
@@ -33,15 +33,15 @@ Cypress.Commands.add('ensureAuthenticated', () => {
             cy.get('button').click()
 
             cy.url().should('not.include', '/login')
-          // } else {
-          //   // Not on login and Dashboard not found
-          //   attempts++;
-          //   if (attempts < maxAttempts) {
-          //     cy.wait(1000);
-          //     checkHomeOrLogin();
-          //   } else {
-          //     throw new Error('Dashboard not found after maximum attempts');
-          //   }
+          } else {
+            // Not on login and Dashboard not found
+            attempts++;
+            if (attempts < maxAttempts) {
+              cy.wait(1000);
+              checkHomeOrLogin();
+            } else {
+              throw new Error('Dashboard not found after maximum attempts');
+            }
           }
         });
       });

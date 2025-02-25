@@ -19,7 +19,7 @@
         cy.get('#saveDetails').click()
         cy.get('input[class="bump-checkbox form-checkbox"]').click()
         cy.get('a[kiwi-data="pay_button"]').click()
-        cy.contains('Pagamento Aprovado!', { timeout: 60000 }).should('be.visible')
+        cy.contains('foi aprovada!', { timeout: 60000 }).should('be.visible')
     })
 
     it('log in', () => {
